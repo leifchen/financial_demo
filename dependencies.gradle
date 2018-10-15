@@ -1,0 +1,23 @@
+ext {
+    versions = [
+            springBootVersion: '2.0.5.RELEASE'
+    ]
+    libs = [
+            common: [
+                    "org.springframework.boot:spring-boot-starter-web:${versions.springBootVersion}",
+                    "org.springframework.boot:spring-boot-starter-data-jpa:${versions.springBootVersion}",
+
+                    // Commons Util
+                    "org.apache.commons:commons-lang3:3.8.1",
+
+                    // Lombok
+                    "org.projectlombok:lombok:1.18.2"
+            ],
+            mysql : [
+                    "mysql:mysql-connector-java:5.1.47"
+            ],
+            test  : [
+                    "org.springframework.boot:spring-boot-starter-test:${versions.springBootVersion}"
+            ]
+    ]
+}
