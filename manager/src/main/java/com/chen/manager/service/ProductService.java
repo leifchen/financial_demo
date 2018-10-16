@@ -2,6 +2,7 @@ package com.chen.manager.service;
 
 import com.chen.entity.Product;
 import com.chen.enums.ProductStatus;
+import com.chen.manager.error.ErrorEnum;
 import com.chen.manager.repository.ProductRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -56,7 +57,7 @@ public class ProductService {
     public Product findOne(String id) {
         Assert.notNull(id, "需要产品编号参数");
         log.debug("查询单个产品，id={}", id);
-        Product result = productRepository.findById(id).get();
+        Product result = productRepository.findById(id).orElse(null);
         log.debug("查询单个产品，结果={}", result);
         return result;
     }
@@ -88,10 +89,10 @@ public class ProductService {
                 if (idList != null && idList.size() > 0) {
                     predicates.add(idCol.in(idList));
                 }
-                if (BigDecimal.ZERO.compareTo(minRewardRate) < 0) {
+                if (minRewardRate != null && BigDecimal.ZERO.compareTo(minRewardRate) < 0) {
                     predicates.add(cb.ge(rewardRateCol, minRewardRate));
                 }
-                if (BigDecimal.ZERO.compareTo(maxRewardRate) < 0) {
+                if (maxRewardRate != null && BigDecimal.ZERO.compareTo(maxRewardRate) < 0) {
                     predicates.add(cb.le(rewardRateCol, maxRewardRate));
                 }
                 if (statusList != null && statusList.size() > 0) {
@@ -117,9 +118,9 @@ public class ProductService {
      * @param product
      */
     private void checkProduct(Product product) {
-        Assert.notNull(product.getId(), "编号不可为空");
-        Assert.isTrue(BigDecimal.ZERO.compareTo(product.getRewardRate()) < 0 && BigDecimal.valueOf(30).compareTo(product.getRewardRate()) >= 0, "收益率范围错误");
-        Assert.isTrue(BigDecimal.valueOf(product.getStepAmount().longValue()).compareTo(product.getStepAmount()) == 0, "投资步长需为整数");
+        Assert.notNull(product.getId(), ErrorEnum.ID_NOT_NULL.getCode());
+        Assert.isTrue(BigDecimal.ZERO.compareTo(product.getRewardRate()) < 0 && BigDecimal.valueOf(30).compareTo(product.getRewardRate()) >= 0, ErrorEnum.ILLEGAL_REWARD_RATE_RANGE.getCode());
+        Assert.isTrue(BigDecimal.valueOf(product.getStepAmount().longValue()).compareTo(product.getStepAmount()) == 0, ErrorEnum.ILLEGAL_STEP_AMOUNT.getCode());
     }
 
     /**
