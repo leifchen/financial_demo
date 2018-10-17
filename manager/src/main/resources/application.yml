@@ -14,3 +14,6 @@ server:
   port: 8080
   servlet:
     context-path: /manager
+swagger:
+  groupName: manager
+  basePackage: com.chen.manager.controller

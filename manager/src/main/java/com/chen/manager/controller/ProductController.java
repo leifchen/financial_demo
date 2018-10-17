@@ -2,6 +2,8 @@ package com.chen.manager.controller;
 
 import com.chen.entity.Product;
 import com.chen.manager.service.ProductService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
@@ -23,11 +25,13 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/product")
+@Api(description = "产品管理")
 public class ProductController {
 
     @Resource
     private ProductService productService;
 
+    @ApiOperation(value = "添加产品", notes = "根据业务规则添加相应的产品")
     @PostMapping
     public Product addProduct(@RequestBody Product product) {
         log.info("创建产品，参数:{}", product);
@@ -36,6 +40,7 @@ public class ProductController {
         return result;
     }
 
+    @ApiOperation(value = "查询产品", notes = "根据id查询产品")
     @GetMapping("/{id}")
     public Product findOne(@PathVariable String id) {
         log.info("查询单个产品，id={}", id);
@@ -44,6 +49,7 @@ public class ProductController {
         return result;
     }
 
+    @ApiOperation(value = "搜索产品", notes = "根据搜索条件分页查询产品")
     @GetMapping
     public Page<Product> query(String ids,
                                BigDecimal minRewardRate,

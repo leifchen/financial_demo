@@ -12,6 +12,7 @@ subprojects {
     targetCompatibility = 1.8
 
     repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         mavenCentral()
     }
 
@@ -21,4 +22,6 @@ subprojects {
     }
 
     [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+//    compileJava.dependsOn(processResources)
 }
