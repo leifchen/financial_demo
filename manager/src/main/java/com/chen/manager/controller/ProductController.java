@@ -35,7 +35,7 @@ public class ProductController {
     @PostMapping
     public Product addProduct(@RequestBody Product product) {
         log.info("创建产品，参数:{}", product);
-        Product result = productService.addProduct(product);
+        Product result = productService.saveProduct(product);
         log.info("创建产品，结果={}", result);
         return result;
     }
@@ -44,7 +44,7 @@ public class ProductController {
     @GetMapping("/{id}")
     public Product findOne(@PathVariable String id) {
         log.info("查询单个产品，id={}", id);
-        Product result = productService.findOne(id);
+        Product result = productService.getOne(id);
         log.info("查询单个产品，结果={}", result);
         return result;
     }

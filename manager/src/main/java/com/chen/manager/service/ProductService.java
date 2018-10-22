@@ -12,7 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Predicate;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,7 +38,7 @@ public class ProductService {
      * @param product
      * @return
      */
-    public Product addProduct(Product product) {
+    public Product saveProduct(Product product) {
         log.debug("创建产品，参数:{}", product);
         // 数据校验
         checkProduct(product);
@@ -54,7 +55,7 @@ public class ProductService {
      * @param id 产品编号
      * @return 返回对应产品或 null
      */
-    public Product findOne(String id) {
+    public Product getOne(String id) {
         Assert.notNull(id, "需要产品编号参数");
         log.debug("查询单个产品，id={}", id);
         Product result = productRepository.findById(id).orElse(null);
@@ -79,29 +80,26 @@ public class ProductService {
                                Pageable pageable) {
 
         log.debug("查询产品，idList={}，minRewardRate={}，maxRewardRate={}，statusList={}，pageable={}", idList, minRewardRate, maxRewardRate, statusList, pageable);
-        Specification<Product> specification = new Specification<Product>() {
-            @Override
-            public Predicate toPredicate(Root<Product> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                Expression<String> idCol = root.get("id");
-                Expression<BigDecimal> rewardRateCol = root.get("rewardRate");
-                Expression<String> statusCol = root.get("status");
-                List<Predicate> predicates = new ArrayList<>();
-                if (idList != null && idList.size() > 0) {
-                    predicates.add(idCol.in(idList));
-                }
-                if (minRewardRate != null && BigDecimal.ZERO.compareTo(minRewardRate) < 0) {
-                    predicates.add(cb.ge(rewardRateCol, minRewardRate));
-                }
-                if (maxRewardRate != null && BigDecimal.ZERO.compareTo(maxRewardRate) < 0) {
-                    predicates.add(cb.le(rewardRateCol, maxRewardRate));
-                }
-                if (statusList != null && statusList.size() > 0) {
-                    predicates.add(statusCol.in(statusList));
-                }
-
-                query.where(predicates.toArray(new Predicate[0]));
-                return null;
+        Specification<Product> specification = (Specification<Product>) (root, query, cb) -> {
+            Expression<String> idCol = root.get("id");
+            Expression<BigDecimal> rewardRateCol = root.get("rewardRate");
+            Expression<String> statusCol = root.get("status");
+            List<Predicate> predicates = new ArrayList<>();
+            if (idList != null && idList.size() > 0) {
+                predicates.add(idCol.in(idList));
             }
+            if (minRewardRate != null && BigDecimal.ZERO.compareTo(minRewardRate) < 0) {
+                predicates.add(cb.ge(rewardRateCol, minRewardRate));
+            }
+            if (maxRewardRate != null && BigDecimal.ZERO.compareTo(maxRewardRate) < 0) {
+                predicates.add(cb.le(rewardRateCol, maxRewardRate));
+            }
+            if (statusList != null && statusList.size() > 0) {
+                predicates.add(statusCol.in(statusList));
+            }
+
+            query.where(predicates.toArray(new Predicate[0]));
+            return null;
         };
 
         Page<Product> result = productRepository.findAll(specification, pageable);

@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 /**
- * ManagerApp
+ * 管理端启动类
  *
  * @Author LeifChen
  * @Date 2018-10-01

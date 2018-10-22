@@ -1,0 +1,6 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /seller
+
+rpc.manager.url: http://localhost:8081/manager/
