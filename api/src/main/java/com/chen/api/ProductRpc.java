@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * 产品相关的 RPC 服务
+ * 产品相关 RPC 服务接口
  *
  * @Author LeifChen
  * @Date 2018-10-22

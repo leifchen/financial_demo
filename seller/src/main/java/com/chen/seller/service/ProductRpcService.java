@@ -20,16 +20,16 @@ import java.util.List;
 @Slf4j
 public class ProductRpcService {
 
-    private ProductRpc productRpc;
+    private final ProductRpc productRpc;
 
     public ProductRpcService(ProductRpc productRpc) {
         this.productRpc = productRpc;
     }
 
     /**
-     * 查询产品列表
+     * 查询所有产品
      *
-     * @return
+     * @return 产品列表
      */
     public List<Product> listAll() {
         ProductRpcReq req = new ProductRpcReq();
@@ -39,6 +39,18 @@ public class ProductRpcService {
         log.info("RPC查询全部产品，请求：{}", req);
         List<Product> result = productRpc.query(req);
         log.info("RPC查询全部产品，结果：{}", result);
+        return result;
+    }
+
+    /**
+     * 查询单个产品
+     *
+     * @return 单个产品
+     */
+    public Product getOne(String id) {
+        log.info("RPC查询单个产品，请求：{}", id);
+        Product result = productRpc.getOne(id);
+        log.info("RPC查询单个产品，结果：{}", result);
         return result;
     }
 }

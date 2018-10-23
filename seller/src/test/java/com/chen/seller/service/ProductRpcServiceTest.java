@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
@@ -25,6 +26,12 @@ public class ProductRpcServiceTest {
     @Test
     public void listAll() {
         List<Product> products = productRpcService.listAll();
-        System.out.println(products);
+        Assert.notEmpty(products,"查询所有产品失败");
+    }
+
+    @Test
+    public void getOne() {
+        Product product = productRpcService.getOne("T001");
+        Assert.notNull(product,"查询单个产品失败");
     }
 }

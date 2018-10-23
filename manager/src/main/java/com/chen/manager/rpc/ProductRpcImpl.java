@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * RPC 服务实现类
+ * 产品相关 RPC 服务实现类
  *
  * @Author LeifChen
  * @Date 2018-10-22
