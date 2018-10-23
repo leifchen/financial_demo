@@ -1,7 +1,6 @@
 package com.chen.swagger;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +26,6 @@ public class SwaggerConfiguration {
 
     private final SwaggerInfo swaggerInfo;
 
-    @Autowired
     public SwaggerConfiguration(SwaggerInfo swaggerInfo) {
         this.swaggerInfo = swaggerInfo;
     }
