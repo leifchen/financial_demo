@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -17,7 +18,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity(name = "t_product")
-public class Product {
+public class Product implements Serializable {
 
     /**
      * 产品 id

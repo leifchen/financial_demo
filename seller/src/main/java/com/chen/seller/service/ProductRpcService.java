@@ -1,13 +1,11 @@
 package com.chen.seller.service;
 
-import com.chen.api.ProductRpc;
-import com.chen.domain.ProductRpcReq;
 import com.chen.entity.Product;
-import com.chen.enums.ProductStatus;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,12 +16,12 @@ import java.util.List;
  */
 @Service
 @Slf4j
-public class ProductRpcService {
+public class ProductRpcService implements ApplicationListener<ContextRefreshedEvent> {
 
-    private final ProductRpc productRpc;
+    private final ProductCache productCache;
 
-    public ProductRpcService(ProductRpc productRpc) {
-        this.productRpc = productRpc;
+    public ProductRpcService(ProductCache productCache) {
+        this.productCache = productCache;
     }
 
     /**
@@ -32,14 +30,7 @@ public class ProductRpcService {
      * @return 产品列表
      */
     public List<Product> listAll() {
-        ProductRpcReq req = new ProductRpcReq();
-        List<String> status = new ArrayList<>();
-        status.add(ProductStatus.AUDITING.name());
-        req.setStatusList(status);
-        log.info("RPC查询全部产品，请求：{}", req);
-        List<Product> result = productRpc.query(req);
-        log.info("RPC查询全部产品，结果：{}", result);
-        return result;
+        return productCache.readAllCache();
     }
 
     /**
@@ -48,9 +39,16 @@ public class ProductRpcService {
      * @return 单个产品
      */
     public Product getOne(String id) {
-        log.info("RPC查询单个产品，请求：{}", id);
-        Product result = productRpc.getOne(id);
-        log.info("RPC查询单个产品，结果：{}", result);
-        return result;
+        Product product = productCache.readCache(id);
+        if (product == null) {
+            productCache.removeCache(id);
+        }
+        return product;
+    }
+
+    @Override
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+        List<Product> products = listAll();
+        products.forEach(product -> productCache.putCache(product));
     }
 }

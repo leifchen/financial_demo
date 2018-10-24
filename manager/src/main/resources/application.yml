@@ -10,6 +10,8 @@ spring:
   jackson:
     #    date-format: yyyy-MM-dd hh:mm:ss
     time-zone: GMT+8
+  cache:
+    type: hazelcast
 
 server:
   port: 8081
@@ -20,6 +22,6 @@ swagger:
   groupName: manager
   basePackage: com.chen.manager.controller
 
-logging:
-  level:
-    com.googlecode.jsonrpc4j: debug
+#logging:
+#  level:
+#    com.googlecode.jsonrpc4j: debug

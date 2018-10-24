@@ -10,6 +10,6 @@ rpc:
     url: http://localhost:8081/manager/
     basePackage: com.chen.api
 
-logging:
-  level:
-    com.googlecode.jsonrpc4j: debug
+#logging:
+#  level:
+#    com.googlecode.jsonrpc4j: debug

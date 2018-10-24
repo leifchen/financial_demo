@@ -3,7 +3,7 @@ package com.chen.api;
 import com.chen.domain.ProductRpcReq;
 import com.chen.entity.Product;
 import com.googlecode.jsonrpc4j.JsonRpcService;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * @Date 2018-10-22
  */
 @JsonRpcService("rpc/product")
-@Service
+@Component
 public interface ProductRpc {
 
     /**

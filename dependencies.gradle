@@ -20,6 +20,10 @@ ext {
             jsonrpc:[
                     "com.github.briandilley.jsonrpc4j:jsonrpc4j:1.5.3"
             ],
+            hazelcast:[
+                    "com.hazelcast:hazelcast:3.11",
+                    "com.hazelcast:hazelcast-spring:3.11"
+            ],
             swagger: [
                     "io.springfox:springfox-swagger2:2.9.2",
                     "io.springfox:springfox-swagger-ui:2.9.2"
