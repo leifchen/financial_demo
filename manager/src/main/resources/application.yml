@@ -5,13 +5,15 @@ spring:
     username: root
     password: 123456
   jpa:
-    show-sql: true
+    show-sql: false
     open-in-view: false
   jackson:
     #    date-format: yyyy-MM-dd hh:mm:ss
     time-zone: GMT+8
-  cache:
-    type: hazelcast
+  activemq:
+    broker-url: tcp://localhost:61616
+  jms:
+    pub-sub-domain: true
 
 server:
   port: 8081

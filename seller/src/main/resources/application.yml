@@ -1,3 +1,11 @@
+spring:
+  cache:
+    type: hazelcast
+  activemq:
+    broker-url: tcp://localhost:61616
+    packages:
+      trust-all: true
+
 server:
   port: 8082
   servlet:
@@ -13,3 +21,4 @@ rpc:
 #logging:
 #  level:
 #    com.googlecode.jsonrpc4j: debug
+

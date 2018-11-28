@@ -24,6 +24,12 @@ ext {
                     "com.hazelcast:hazelcast:3.11",
                     "com.hazelcast:hazelcast-spring:3.11"
             ],
+            activemq: [
+                    "org.springframework.boot:spring-boot-starter-activemq:${versions.springBootVersion}"
+            ],
+            rsa: [
+                    "commons-codec:commons-codec:1.11"
+            ],
             swagger: [
                     "io.springfox:springfox-swagger2:2.9.2",
                     "io.springfox:springfox-swagger-ui:2.9.2"

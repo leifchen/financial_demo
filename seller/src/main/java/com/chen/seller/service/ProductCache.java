@@ -1,7 +1,7 @@
 package com.chen.seller.service;
 
 import com.chen.api.ProductRpc;
-import com.chen.domain.ProductRpcReq;
+import com.chen.api.domain.ProductRpcReq;
 import com.chen.entity.Product;
 import com.chen.enums.ProductStatus;
 import com.hazelcast.core.HazelcastInstance;
@@ -30,7 +30,8 @@ public class ProductCache {
     private final ProductRpc productRpc;
     private final HazelcastInstance hazelcastInstance;
 
-    public ProductCache(ProductRpc productRpc, HazelcastInstance hazelcastInstance) {
+    public ProductCache(ProductRpc productRpc,
+                        HazelcastInstance hazelcastInstance) {
         this.productRpc = productRpc;
         this.hazelcastInstance = hazelcastInstance;
     }

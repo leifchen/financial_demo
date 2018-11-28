@@ -1,7 +1,7 @@
 package com.chen.manager.rpc;
 
 import com.chen.api.ProductRpc;
-import com.chen.domain.ProductRpcReq;
+import com.chen.api.domain.ProductRpcReq;
 import com.chen.entity.Product;
 import com.chen.manager.service.ProductService;
 import com.googlecode.jsonrpc4j.spring.AutoJsonRpcServiceImpl;

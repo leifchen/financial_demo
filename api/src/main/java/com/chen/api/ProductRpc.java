@@ -1,6 +1,6 @@
 package com.chen.api;
 
-import com.chen.domain.ProductRpcReq;
+import com.chen.api.domain.ProductRpcReq;
 import com.chen.entity.Product;
 import com.googlecode.jsonrpc4j.JsonRpcService;
 import org.springframework.stereotype.Component;

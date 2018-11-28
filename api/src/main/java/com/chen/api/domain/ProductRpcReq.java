@@ -1,4 +1,4 @@
-package com.chen.domain;
+package com.chen.api.domain;
 
 import lombok.Getter;
 import lombok.Setter;
