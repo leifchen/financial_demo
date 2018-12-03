@@ -35,7 +35,7 @@ public class RsaUtilTest {
 
     @Test
     public void sign() {
-        String text = "LeifChen";
+        String text = "{\"amount\":100,\"channelId\":\"C1\",\"channelUserId\":\"U1\",\"gmtCreate\":\"2018-12-03 14:30:00\",\"memo\":\"test\",\"outerOrderId\":\"O001\",\"productId\":\"T001\"}";
         String sign = RsaUtil.sign(text, privateKey);
         System.out.println(sign);
         System.out.println(RsaUtil.verify(text, sign, publicKey));

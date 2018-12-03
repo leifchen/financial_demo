@@ -2,7 +2,7 @@ package com.chen.seller;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cache.annotation.EnableCaching;
 
 /**
@@ -11,9 +11,9 @@ import org.springframework.cache.annotation.EnableCaching;
  * @Author LeifChen
  * @Date 2018-10-22
  */
-@SpringBootApplication(scanBasePackages = "com.chen",
-        exclude = {DataSourceAutoConfiguration.class})
 @EnableCaching
+@EntityScan(basePackages = "com.chen.entity")
+@SpringBootApplication
 public class SellerApp {
 
     public static void main(String[] args) {
